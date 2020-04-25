@@ -1,0 +1,8 @@
+FROM php:7.0-fpm
+RUN docker-php-ext-install mysqli
+RUN echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
+RUN echo "upload_max_filesize = 20M\npost_max_size = 20M" >> /usr/local/etc/php/conf.d/size.ini
+RUN echo expose_php = off >> /usr/local/etc/php/conf.d/expose.ini
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
+RUN chmod +x wp-cli.phar 
+RUN mv wp-cli.phar /usr/local/bin/wp
